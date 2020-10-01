@@ -1,0 +1,61 @@
+{% extends "baseadmin.html" %}
+{% block content %}
+{% load static %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>All User</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="card">
+      <div class="card-header" style=" background-color:#007bff;">
+        <h3 class="card-title" style="color:white; size: 30px;  padding-right: 5px;">User</h3>
+        <a id="downloadLink" onclick="exportF(this)">
+          <input type='button' value="Export">
+        </a>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+            <i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive" style='padding: 5px; overflow-x:auto;'>
+          <table id="example1" class="table table-striped table-bordered" style="margin-bottom: 0">
+            <thead>
+              <tr>
+                <th>Nmae</th>
+                <th> Email </th>
+                <th> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>Email</td>
+                <td>
+                  <div class='row'>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="radio1">
+                      <label class="form-check-label">Teacher</label>
+                    </div>&ensp;&ensp;
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="radio1">
+                      <label class="form-check-label">Student</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </section>
+</div>
+{% endblock %}
