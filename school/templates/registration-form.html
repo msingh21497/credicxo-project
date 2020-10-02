@@ -1,6 +1,14 @@
 {% extends "baseadmin.html" %}
 {% block content %}
 {% load static %}
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" type="text/css" rel="stylesheet"> -->
+
 <div class="content-wrapper">
   <section class="content-header">
     <div class="container-fluid">
@@ -28,29 +36,31 @@
                 <i class="fas fa-times"></i></button>
             </div>
           </div>
-          <form action="" method="post" enctype="multipart/form-data">
+          <form id="rform" class="form-signin app-cam" method="POST">
             {% csrf_token %}
             <div class="card-body pad">
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <label>Full Name</label>
-                <input type="text" class="form-control" name="first_name" value="" placeholder="Enter your full name.">
+                <input type="text" class="form-control" name="first_name" id='first_name' value=""
+                  placeholder="Enter your full name.">
+                <!-- <input type="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Name"> -->
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <label>Email Id.</label>
-                <input type="email" class="form-control" name="username" value="" placeholder="Enter your email id.">
+                <input type="email" class="form-control" name="username" id='username' value=""
+                  placeholder="Enter your email id.">
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <label>Password</label>
-                <input type="password" class="form-control" name="password" value="" placeholder="Enter your password.">
+                <input type="password" class="form-control" name="password" id='password' value=""
+                  placeholder="Enter your password.">
               </div>
             </div>
         </div>
         <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
           <a href="">
-            <input type="submit" class="btn btn-outline-primary" value="Submit">
-          </a>
-          <a href="">
-            <input type="button" class="btn btn-outline-danger" value="cancel">
+            <input type="button" class="btn btn-danger" value="cancel">
           </a>
         </div>
         </form>
@@ -59,4 +69,28 @@
 </div>
 </section>
 </div>
+
+<script>
+  $(document).on('submit', '#rform', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: "http://127.0.0.1:8000/api/all-user/",
+      data: {
+        first_name: $('#first_name').val(),
+        username: $('#username').val(),
+        password: $('#password').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function (json) {
+        alert("created New User")
+      },
+      failure: function (json) {
+        alert("error")
+      },
+
+    });
+  });
+
+</script>
 {% endblock %}
